@@ -79,17 +79,7 @@ class MainActivity : AppCompatActivity() {
         return textView
     }
 
-
     private fun getViewRefactor(position: Int, recycledView: View?, collection: List<Int>, context: Context) =
-        (recycledView as? TextView)?:
-            TextView(context).apply {
-            setPadding(5, 10, 10, 0)
-            textSize = 22f
-        }.apply{
-              text = collection[position].toString()
-        }
-
-    private fun getViewRefactor2(position: Int, recycledView: View?, collection: List<Int>, context: Context) =
         recycledView?.let {
             it
         }?:run {
