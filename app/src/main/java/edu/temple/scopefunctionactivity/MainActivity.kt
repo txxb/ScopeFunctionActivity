@@ -15,13 +15,12 @@ class MainActivity : AppCompatActivity() {
 
         // You can test your helper functions by  calling them from onCreate() and
         // printing their output to the Log, which is visible in the LogCat:
-//        Log.d("Test Data Array: ", getTestDataArray().toString())
-//        Log.d("Test Data Array Refactor: ", getTestDataArrayRefactor().toString())
+        Log.d("Test Data Array: ", getTestDataArray().toString())
+        Log.d("Test Data Array Refactor: ", getTestDataArrayRefactor().toString())
 
         val nums = listOf(71.0, 1.0, 3.0)
         Log.d("Average Less Than Median: ", averageLessThanMedian(nums).toString())
         Log.d("Average Less Than Median Refactor:  ", averageLessThanMedianRefactor(nums).toString())
-
 
 
     }
@@ -53,9 +52,6 @@ class MainActivity : AppCompatActivity() {
         else
             sortedList[sortedList.size / 2]
 
-        Log.d("AVERAGE: ", avg.toString())
-        Log.d("MEDIAN: ", median.toString())
-
         return avg < median
     }
 
@@ -83,4 +79,25 @@ class MainActivity : AppCompatActivity() {
         return textView
     }
 
+
+    private fun getViewRefactor(position: Int, recycledView: View?, collection: List<Int>, context: Context) =
+        (recycledView as? TextView)?:
+            TextView(context).apply {
+            setPadding(5, 10, 10, 0)
+            textSize = 22f
+        }.apply{
+              text = collection[position].toString()
+        }
+
+    private fun getViewRefactor2(position: Int, recycledView: View?, collection: List<Int>, context: Context) =
+        recycledView?.let {
+            it
+        }?:run {
+            val textView = TextView(context)
+            textView.setPadding(5, 10, 10, 0)
+            textView.textSize = 22f
+            textView
+        }.apply{
+            this.text = collection[position].toString()
+        }
 }
