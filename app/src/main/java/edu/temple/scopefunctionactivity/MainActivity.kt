@@ -15,8 +15,12 @@ class MainActivity : AppCompatActivity() {
 
         // You can test your helper functions by  calling them from onCreate() and
         // printing their output to the Log, which is visible in the LogCat:
-        Log.d("Test Data Array: ", getTestDataArray().toString())
-        Log.d("Test Data Array Refactor: ", getTestDataArrayRefactor().toString())
+//        Log.d("Test Data Array: ", getTestDataArray().toString())
+//        Log.d("Test Data Array Refactor: ", getTestDataArrayRefactor().toString())
+
+        val nums = listOf(71.0, 1.0, 3.0)
+        Log.d("Average Less Than Median: ", averageLessThanMedian(nums).toString())
+        Log.d("Average Less Than Median Refactor:  ", averageLessThanMedianRefactor(nums).toString())
 
 
 
@@ -42,17 +46,25 @@ class MainActivity : AppCompatActivity() {
     // Return true if average value in list is greater than median value, false otherwise
     private fun averageLessThanMedian(listOfNumbers: List<Double>): Boolean {
         val avg = listOfNumbers.average()
+
         val sortedList = listOfNumbers.sorted()
         val median = if (sortedList.size % 2 == 0)
             (sortedList[sortedList.size / 2] + sortedList[(sortedList.size - 1) / 2]) / 2
         else
             sortedList[sortedList.size / 2]
 
+        Log.d("AVERAGE: ", avg.toString())
+        Log.d("MEDIAN: ", median.toString())
+
         return avg < median
     }
 
-    private fun averageLessThanMedianRefactor(listOfNumbers: List<Double>) = with(listOfNumbers.sorted()){
-    }
+
+    private fun averageLessThanMedianRefactor(listOfNumbers: List<Double>) =
+        with(listOfNumbers.sorted()){
+            this.average() < run { if ( this.size % 2 == 0) (this[this.size / 2] + this[(this.size - 1) / 2]) / 2
+                                else this[this.size / 2]  }
+        }
 
     // Create a view from an item in a collection, but recycle if possible (similar to an AdapterView's adapter)
     private fun getView(position: Int, recycledView: View?, collection: List<Int>, context: Context): View {
